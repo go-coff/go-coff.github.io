@@ -1,0 +1,27 @@
+baseURL = "https://go-coff.github.io/"
+title = "go-coff"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+# Each repo card. "result" is the honest headline (capabilities AND limits).
+# "type" = lib vs cli (the library plus its reference CLI).
+[[params.repos]]
+  name = "peln"
+  accel = "PE/COFF linker + section appender + bare-metal image formats"
+  type = "lib"
+  arch = "objects/PIE → PE32+ EFI (amd64 · arm64 · riscv64 · loongarch64)"
+  result = "pure-Go PE/COFF tooling for UEFI without binutils or LLD: linker (relocatable .o or PIE → PE32+/EFI, the lld-link /subsystem:efi_application replacement), appender (add sections to an existing PE — objcopy --add-section, for UKI assembly), and fwimg for non-UEFI bare-metal images (ELF → flat binary, Motorola SREC, Intel HEX, U-Boot uImage). Zero third-party deps, 100% coverage."
+[[params.repos]]
+  name = "pectl"
+  accel = "Reference CLI: link / convert / append / pack / sign"
+  type = "cli"
+  arch = "single static binary, no binutils / LLD / objcopy / sbsign"
+  result = "Cobra-based reference CLI over the peln library: links relocatable objects → PE32+/EFI, converts a PIE ELF → PE32+/EFI, runs objcopy-style ELF conversions, appends PE sections (UKI assembly), packs EFI binaries (via efipack), and Authenticode-signs for Secure Boot. Pure Go, no C toolchain. 100% coverage."
+[[params.repos]]
+  name = "efipack"
+  accel = "Self-extracting PE32+/EFI compressor (UPX-equivalent)"
+  type = "lib"
+  arch = "host side only — runtime decompressor stub is future work"
+  result = "pure-Go library that wraps a PE32+/EFI binary into a self-extracting PE32+/EFI image — a UPX-equivalent for the EFI format, intended to mitigate the EDK2 OVMF amd64 CpuPageTableLib #GP on LoadImage/StartImage of large EFI binaries (cloud-boot M6.2). Current revision ships the host side: compression API, PE32+/EFI envelope assembly, arch detection (amd64/arm64/riscv64/loong64) and round-trip tests. The runtime per-arch decompressor stub is not yet implemented, so the output is not yet a runnable EFI."
