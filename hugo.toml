@@ -25,3 +25,9 @@ disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
   type = "lib"
   arch = "host side only — runtime decompressor stub is future work"
   result = "pure-Go library that wraps a PE32+/EFI binary into a self-extracting PE32+/EFI image — a UPX-equivalent for the EFI format, intended to mitigate the EDK2 OVMF amd64 CpuPageTableLib #GP on LoadImage/StartImage of large EFI binaries (cloud-boot M6.2). Current revision ships the host side: compression API, PE32+/EFI envelope assembly, arch detection (amd64/arm64/riscv64/loong64) and round-trip tests. The runtime per-arch decompressor stub is not yet implemented, so the output is not yet a runnable EFI."
+[[params.repos]]
+  name = "stub"
+  accel = "A UEFI Unified Kernel Image stub, in TinyGo"
+  type = "firmware"
+  arch = "x86_64 · aarch64, booted under OVMF"
+  result = "The piece that removes systemd as a BUILD-TIME dependency for anybody assembling a UKI: pair it with peln and pectl and the whole pipeline runs without binutils and without systemd-stub. Written in TinyGo plus a thin assembly shim. <strong>Phase 3 (basic)</strong>: it boots under OVMF on both architectures, prints a banner through SimpleTextOutput, walks its own PE section table through EFI_LOADED_IMAGE_PROTOCOL, and chain-loads a .linux section through BootServices.LoadImage when one is present."
