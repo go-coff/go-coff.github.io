@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{{/* Dark Reader repaints pages that already draw their own dark theme, as this one does: ask it to stand aside. */}}
+<meta name="darkreader-lock">
 <title>{{ .Site.Title }} — pure-Go PE/COFF tooling for UEFI</title>
 <meta name="description" content="Pure-Go PE/COFF tooling for building UEFI applications without binutils or LLD: relocatable object / PIE → PE32+ EFI linker, PE section appender (UKI assembly), bare-metal image formats, a reference CLI, and a self-extracting EFI compressor. Zero third-party dependencies, CGO_ENABLED=0.">
 <style>
