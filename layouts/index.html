@@ -39,15 +39,13 @@
   <div class="hero"><div class="wrap">
     <div>
       <h1 class="head">go-coff</h1>
-      <p class="sub">Pure-Go <strong>PE/COFF tooling for UEFI</strong> — turn relocatable
+      <p class="sub">{{ if partial "mantra-on.html" . }}Go{{ else }}Pure-Go{{ end }} <strong>PE/COFF tooling for UEFI</strong> — turn relocatable
       objects or a PIE into a <code>PE32+/EFI</code> image, assemble UKIs, and sign for
       Secure Boot, all without <code>binutils</code>, <code>LLD</code> or
       <code>objcopy</code>.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="https://pkg.go.dev/github.com/go-coff/peln">{{ partial "icons/book.html" . }}Documentation</a>
-        <a class="btn btn-ghost" href="https://github.com/go-coff">{{ partial "icons/github.html" . }}GitHub</a>
-      </div>
-      <div class="trust">{{ if not (partial "mantra-on.html" $) }}<span class="pill">CGO_ENABLED=0</span>{{ end }}
+      {{/* [[params.cta]] in hugo.toml: the kit renders the row */}}
+      {{ partial "cta.html" . }}
+      <div class="trust">{{ if not (partial "mantra-on.html" $) }}{{ if not (partial "mantra-on.html" $) }}<span class="pill">CGO_ENABLED=0</span>{{ end }}{{ end }}
       <span class="pill">no binutils / LLD / objcopy / sbsign</span>
       <span class="pill">amd64 · arm64 · riscv64 · loongarch64</span>
       <span class="pill">zero third-party deps</span>
